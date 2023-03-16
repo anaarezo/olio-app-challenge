@@ -1,4 +1,4 @@
-# Challenge - Olio App
+# Challenge - Olio App 🌱
 
 Evaluate general front end development skills and capabilities.
 
