@@ -27,6 +27,7 @@ Evaluate general front end development skills and capabilities.
 ## Built With
 
 - [React Native](https://reactnative.dev/)
+- [React Navigation](https://reactnavigation.org/)
 - [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
 
 ## Installation
