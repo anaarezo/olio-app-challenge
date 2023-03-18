@@ -1,3 +1,4 @@
 import {BottomTabs} from './BottomTabs';
+import {StackScreen} from './Stack';
 
-export default {BottomTabs};
+export default {BottomTabs, StackScreen};
