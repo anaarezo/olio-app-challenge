@@ -32,7 +32,9 @@ const HomeScreen = ({navigation}: any) => {
     return (
       <TouchableOpacity
         item={item}
-        onPress={() => navigation.navigate('ProductDetails', {product: item})}>
+        onPress={() => {
+          navigation.navigate('ProductDetails', {product: item});
+        }}>
         <View
           // eslint-disable-next-line react-native/no-inline-styles
           style={{

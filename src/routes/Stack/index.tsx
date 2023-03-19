@@ -13,7 +13,11 @@ export const StackScreen = () => {
         component={BottomTabs}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="ProductDetails" component={ProductDetailsScreen} />
+      <Stack.Screen
+        name="ProductDetails"
+        component={ProductDetailsScreen}
+        options={({route}) => ({title: route?.params?.product.title})}
+      />
     </Stack.Navigator>
   );
 };
