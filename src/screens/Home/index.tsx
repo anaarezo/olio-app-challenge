@@ -28,8 +28,11 @@ const HomeScreen = ({navigation}: any) => {
   const [selectedId, setSelectedId] = useState(null);
 
   const renderProductCard = ({item, title, onPress}: IProductCard) => {
+    console.log('item*****', item);
     return (
-      <TouchableOpacity item={item} onPress={() => navigation.navigate('Map')}>
+      <TouchableOpacity
+        item={item}
+        onPress={() => navigation.navigate('ProductDetails', {params: item})}>
         <View
           // eslint-disable-next-line react-native/no-inline-styles
           style={{

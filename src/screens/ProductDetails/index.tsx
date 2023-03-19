@@ -3,9 +3,27 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import * as S from './styles';
 
-const ProductDetailsScreen = ({route}: any) => {
-  const test = route.params;
-  console.log(test);
+interface IProductDetails {
+  route: {
+    params: {
+      id: string;
+      dateAdded: string;
+      distance: string;
+      productPicture: string;
+      rate: string;
+      title: string;
+      userPicture: string;
+      username: string;
+      viewers: number;
+    };
+  };
+}
+
+const ProductDetailsScreen = ({route}: IProductDetails) => {
+  const data = route.params;
+  console.log('Test', data?.dateAdded);
+
+  // Test {"params": {"dateAdded": "Just added", "distance": "10", "id": "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba6", "productPicture": "https://cdn.olioex.com/uploads/photo/file/00gRGrBRDFYrR2j-9SJVYg/small_image.jpg", "rate": "5.1", "title": "First Item 2", "userPicture": "https://cdn.olioex.com/uploads/avatar/file/oZq8DF3dzLEi3Fnf4XxMrg/small_image.jpg", "username": "John", "viewers": 12}}
 
   return (
     <SafeAreaView>

@@ -14,14 +14,18 @@ Evaluate general front end development skills and capabilities.
 
     .
     ├── ...
-    ├──
-    │   ├──         #
-    │   ├──         #
-    │   ├──         #
-    │   │   └──
-    │   ├──
-    │   │   └──
-    │   └──
+    ├── src
+    │   ├── assets
+    │   ├── routes
+    │   │   ├── BottomTabs
+    │   │   └── Stack
+    │   ├── screens           # Project screens
+    │   │   ├── Home
+    │   │   ├── LocationMap
+    │   │   └── ProductDetails
+    │   ├── services
+    │   │   └── library
+    │   └── App.js            # App Loader
     └── ...
 
 ## Built With
