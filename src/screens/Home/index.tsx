@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import React, {FlatList, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,7 +16,7 @@ interface IProductCard {
 const HomeScreen = ({navigation}: any) => {
   const {products} = useProductsList();
 
-  // const [selectedId, setSelectedId] = useState(null);
+  const [sectionFilter, setSectionFilter] = useState<string>('');
 
   const renderProductCard = ({item}: IProductCard) => {
     return (
@@ -84,17 +85,19 @@ const HomeScreen = ({navigation}: any) => {
   return (
     <>
       <S.TopBar>
-        <TouchableOpacity>
-          <S.FilterLabel>Type 1</S.FilterLabel>
+        <TouchableOpacity onPress={() => setSectionFilter('food')}>
+          <S.FilterLabel>Food</S.FilterLabel>
         </TouchableOpacity>
-        <TouchableOpacity>
-          <S.FilterLabel>Type 2</S.FilterLabel>
+        <TouchableOpacity onPress={() => setSectionFilter('product')}>
+          <S.FilterLabel>Non-Food</S.FilterLabel>
         </TouchableOpacity>
       </S.TopBar>
       <FlatList
         // eslint-disable-next-line react-native/no-inline-styles
         contentContainerStyle={{flexGrow: 1, paddingTop: 10}}
-        data={products}
+        data={products?.filter(product =>
+          product.section.includes(sectionFilter),
+        )}
         renderItem={renderProductCard}
         keyExtractor={item => item.id}
         // extraData={selectedId}
