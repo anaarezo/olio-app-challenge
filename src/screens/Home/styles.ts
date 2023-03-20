@@ -23,6 +23,7 @@ export const Title = styled.Text`
   font-size: 16px;
   font-weight: 600;
   color: #333333;
+  max-width: 225px;
 `;
 
 export const UserInfo = styled.View`
@@ -48,6 +49,7 @@ export const ProductInfo = styled.View`
 `;
 
 export const RatingInfo = styled.View`
+  flex-direction: row;
   margin-left: 8px;
 `;
 

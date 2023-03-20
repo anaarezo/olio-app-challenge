@@ -1,4 +1,4 @@
-import React, {ScrollView, View, Dimensions} from 'react-native';
+import React, {View, Dimensions} from 'react-native';
 import MapView, {Circle} from 'react-native-maps';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import mockData from '../../../mockData.json';
@@ -53,29 +53,27 @@ const mapInitialRegion = {
 const LocationMapScreen = () => {
   return (
     <SafeAreaView>
-      <ScrollView>
-        <View>
-          <MapView
-            style={{
-              width: width,
-              height: height,
-            }}
-            initialRegion={mapInitialRegion}>
-            {mockData.map((product, index) => (
-              <Circle
-                key={index}
-                center={{
-                  latitude: product.location.latitude,
-                  longitude: product.location.longitude,
-                }}
-                radius={20}
-                strokeColor={'rgb(187,66,145)'}
-                fillColor={'rgba(187,66,145,0.05)'}
-              />
-            ))}
-          </MapView>
-        </View>
-      </ScrollView>
+      <View>
+        <MapView
+          style={{
+            width: width,
+            height: height,
+          }}
+          initialRegion={mapInitialRegion}>
+          {mockData.map((product, index) => (
+            <Circle
+              key={index}
+              center={{
+                latitude: product.location.latitude,
+                longitude: product.location.longitude,
+              }}
+              radius={20}
+              strokeColor={'rgb(187,66,145)'}
+              fillColor={'rgba(187,66,145,0.05)'}
+            />
+          ))}
+        </MapView>
+      </View>
     </SafeAreaView>
   );
 };

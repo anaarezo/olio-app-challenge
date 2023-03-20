@@ -1,54 +1,56 @@
-import React, {SafeAreaView, ScrollView} from 'react-native';
+import React, {
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  Alert,
+  Share,
+} from 'react-native';
+import MapView, {Circle} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {IProduct} from '../../store/articles/interface';
 
 import * as S from './styles';
 
 interface IProductDetails {
   route: {
     params: {
-      product: {
-        id: string;
-        dateAdded: string;
-        distance: string;
-        productPicture: string;
-        rate: string;
-        title: string;
-        userPicture: string;
-        username: string;
-        viewers: number;
-      };
+      product: IProduct;
     };
   };
 }
 
+const DIMENSION_DELTA = 0.002;
+
 const ProductDetailsScreen = ({route}: IProductDetails) => {
-  const data = route.params.product;
-  console.log('Test', data?.dateAdded);
+  const product = route.params.product;
+  const {width} = Dimensions.get('screen');
 
-  // navigation.setOptions({title: 'Updated!'});
-
-  // Test {"params": {"dateAdded": "Just added", "distance": "10", "id": "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba6", "productPicture": "https://cdn.olioex.com/uploads/photo/file/00gRGrBRDFYrR2j-9SJVYg/small_image.jpg", "rate": "5.1", "title": "First Item 2", "userPicture": "https://cdn.olioex.com/uploads/avatar/file/oZq8DF3dzLEi3Fnf4XxMrg/small_image.jpg", "username": "John", "viewers": 12}}
+  const onShare = async () => {
+    try {
+      await Share.share({
+        message: `${product.title} is available at Olio for free!!!`,
+      });
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
+  };
 
   return (
     <SafeAreaView>
       <ScrollView>
         <S.Container>
-          <S.ProductPicture
-            source={{
-              uri: 'https://cdn.olioex.com/uploads/photo/file/00gRGrBRDFYrR2j-9SJVYg/large_image.jpg',
-            }}
-          />
+          <S.ProductPicture source={{uri: product?.images[0].files.medium}} />
 
           <S.InfoBar>
-            <S.Brand>{'From Amazon Fresh'}</S.Brand>
+            <S.Brand>{'From Olio'}</S.Brand>
             <S.BarContent>
-              <S.ShareBox>
+              <S.ShareBox onPress={onShare}>
                 <Icon name="share-square-o" size={18} color="#444444" />
                 <S.Share>{'Share'}</S.Share>
               </S.ShareBox>
               <S.LikeBox>
                 <Icon name="heart-o" size={18} color="#444444" />
-                <S.Likes>{'0 likes'}</S.Likes>
+                <S.Likes>{`${product.reactions.likes} likes`}</S.Likes>
               </S.LikeBox>
             </S.BarContent>
           </S.InfoBar>
@@ -56,35 +58,40 @@ const ProductDetailsScreen = ({route}: IProductDetails) => {
           <S.Content>
             <S.UserInfo>
               <S.UserAvatar
-                source={{
-                  uri: 'https://cdn.olioex.com/uploads/avatar/file/oZq8DF3dzLEi3Fnf4XxMrg/small_image.jpg',
-                }}
+                source={{uri: product?.user.current_avatar.small}}
               />
-              <S.RatingInfo>
-                <Icon name="star" size={10} color="#ffffff" />
-                <S.Rating>{'5.0'}</S.Rating>
-              </S.RatingInfo>
+              {!product.user.rating.rating ? null : (
+                <S.RatingInfo>
+                  <Icon name="star" size={10} color="#ffffff" />
+                  <S.Rating>
+                    {(product.user.rating?.rating / 2).toFixed(1)}
+                  </S.Rating>
+                </S.RatingInfo>
+              )}
             </S.UserInfo>
 
             <S.ProductInfo>
-              <S.UserName>{'John is giving away'}</S.UserName>
-              <S.Title>{'White bread'}</S.Title>
+              <S.UserName>{`${product.user.first_name} is giving away`}</S.UserName>
+              <S.Title>{product.title}</S.Title>
               <S.AddedDate>
                 <Icon name="clock-o" size={14} color="#444444" />
-                <S.Time>{'Added in 20 hours'}</S.Time>
-                <S.Role>{' Volunteer'}</S.Role>
+                <S.Time>{`Added in ${product.created_at} •`}</S.Time>
+                {product.user.roles.includes('Volunteer') ? (
+                  <S.Role>{' Volunteer'}</S.Role>
+                ) : null}
               </S.AddedDate>
             </S.ProductInfo>
           </S.Content>
 
           <S.Description>
-            <S.ProductDescription>{'Lorem ipsum dolor'}</S.ProductDescription>
-            <S.MoreInfo>{'View food allergen information'}</S.MoreInfo>
+            <S.ProductDescription>{product.description}</S.ProductDescription>
+            {product.section === 'food' ? (
+              <S.MoreInfo>{'View food allergen information'}</S.MoreInfo>
+            ) : null}
+
             <S.PickupTitle>{'Pick-up times'}</S.PickupTitle>
             <S.PickupDescription>
-              {
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pharetra dui. Sed suscipit, tellus a elementum egestas, orci erat ullamcorper urna, vitae consequat mauris ligula quis quam.'
-              }
+              {product.collection_notes}
             </S.PickupDescription>
           </S.Description>
 
@@ -94,7 +101,30 @@ const ProductDetailsScreen = ({route}: IProductDetails) => {
             }
           </S.Disclaimer>
 
-          <S.LocationMap>{''}</S.LocationMap>
+          <S.LocationMap>
+            <MapView
+              // eslint-disable-next-line react-native/no-inline-styles
+              style={{
+                width: width,
+                height: 270,
+              }}
+              initialRegion={{
+                latitude: product.location.latitude,
+                longitude: product.location.longitude,
+                latitudeDelta: DIMENSION_DELTA,
+                longitudeDelta: DIMENSION_DELTA,
+              }}>
+              <Circle
+                center={{
+                  latitude: product.location.latitude,
+                  longitude: product.location.longitude,
+                }}
+                radius={20}
+                strokeColor={'#bb4291'}
+                fillColor={'rgba(187,66,145,0.05)'}
+              />
+            </MapView>
+          </S.LocationMap>
         </S.Container>
       </ScrollView>
 
@@ -103,7 +133,7 @@ const ProductDetailsScreen = ({route}: IProductDetails) => {
           <S.RequestLabel>{'Request this'}</S.RequestLabel>
           <S.RequestLocation>
             <Icon name="map-marker" size={13} color="#ff94e2" />
-            {' 0.6mi away'}
+            {` ${product.location.distance}mi away`}
           </S.RequestLocation>
         </S.RequestButton>
       </S.ContainerButton>

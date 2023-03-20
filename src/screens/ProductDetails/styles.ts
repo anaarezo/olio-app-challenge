@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   background-color: #ffffff;
-  padding-bottom: 50px;
+  padding-bottom: 75px;
 `;
 
 export const ProductPicture = styled.Image`
@@ -101,6 +101,7 @@ export const Title = styled.Text`
   font-weight: 500;
   color: #131314;
   line-height: 30px;
+  max-width: 300px;
 `;
 
 export const AddedDate = styled.View`
@@ -169,11 +170,9 @@ export const Disclaimer = styled.Text`
   line-height: 18px;
 `;
 
-export const LocationMap = styled.Text`
-  font-size: 14px;
-  font-weight: 600;
-  color: #444444;
-`;
+export const LocationMap = styled.View``;
+
+export const PlaceDistance = styled.Text``;
 
 export const ContainerButton = styled.View`
   margin: 0 16px;
