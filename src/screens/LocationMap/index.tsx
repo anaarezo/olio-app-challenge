@@ -1,6 +1,7 @@
 import React, {View, Dimensions} from 'react-native';
 import MapView, {Circle} from 'react-native-maps';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
 import mockData from '../../../mockData.json';
 // import * as S from './styles';
 
@@ -68,7 +69,7 @@ const LocationMapScreen = () => {
                 longitude: product.location.longitude,
               }}
               radius={20}
-              strokeColor={'rgb(187,66,145)'}
+              strokeColor={'#bb4291'}
               fillColor={'rgba(187,66,145,0.05)'}
             />
           ))}

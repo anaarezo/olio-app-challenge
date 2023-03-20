@@ -7,8 +7,9 @@ import React, {
 } from 'react-native';
 import MapView, {Circle} from 'react-native-maps';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {IProduct} from '../../store/articles/interface';
 
+import {convertDateToDistance, convertStringUTCToDate} from '../../utils';
+import {IProduct} from '../../store/articles/interface';
 import * as S from './styles';
 
 interface IProductDetails {
@@ -75,9 +76,12 @@ const ProductDetailsScreen = ({route}: IProductDetails) => {
               <S.Title>{product.title}</S.Title>
               <S.AddedDate>
                 <Icon name="clock-o" size={14} color="#444444" />
-                <S.Time>{`Added in ${product.created_at} •`}</S.Time>
+                <S.Time>{`Added ${convertDateToDistance(
+                  convertStringUTCToDate(product.created_at),
+                )} `}</S.Time>
+
                 {product.user.roles.includes('Volunteer') ? (
-                  <S.Role>{' Volunteer'}</S.Role>
+                  <S.Role>{'• Volunteer'}</S.Role>
                 ) : null}
               </S.AddedDate>
             </S.ProductInfo>
@@ -101,6 +105,13 @@ const ProductDetailsScreen = ({route}: IProductDetails) => {
             }
           </S.Disclaimer>
 
+          <S.Place>
+            <S.Aprox>{'Approx. Location'}</S.Aprox>
+            <S.AproxDistance>
+              <Icon name="map-marker" size={13} color="#757576" />
+              {` ${product.location.distance}mi away`}
+            </S.AproxDistance>
+          </S.Place>
           <S.LocationMap>
             <MapView
               // eslint-disable-next-line react-native/no-inline-styles

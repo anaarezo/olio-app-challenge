@@ -6,6 +6,7 @@ import {IProduct} from '../../store/articles/interface';
 import useProductsList from './hooks/useProductsList';
 
 import * as S from './styles';
+import {convertDateToDistance, convertStringUTCToDate} from '../../utils';
 
 interface IProductCard {
   item: IProduct;
@@ -13,6 +14,7 @@ interface IProductCard {
 
 const HomeScreen = ({navigation}: any) => {
   const {products} = useProductsList();
+
   // const [selectedId, setSelectedId] = useState(null);
 
   const renderProductCard = ({item}: IProductCard) => {
@@ -65,7 +67,11 @@ const HomeScreen = ({navigation}: any) => {
                   <S.Viewed>{item.reactions.views}</S.Viewed>
                 </S.ViewersInfo>
                 <S.DateInfo>
-                  <S.AddedDate>{item.created_at}</S.AddedDate>
+                  <S.AddedDate>
+                    {`${convertDateToDistance(
+                      convertStringUTCToDate(item.created_at),
+                    )}`}
+                  </S.AddedDate>
                 </S.DateInfo>
               </S.ProductInfo>
             </S.Details>
@@ -76,14 +82,24 @@ const HomeScreen = ({navigation}: any) => {
   };
 
   return (
-    <FlatList
-      // eslint-disable-next-line react-native/no-inline-styles
-      contentContainerStyle={{flexGrow: 1, paddingTop: 10}}
-      data={products}
-      renderItem={renderProductCard}
-      keyExtractor={item => item.id}
-      // extraData={selectedId}
-    />
+    <>
+      <S.TopBar>
+        <TouchableOpacity>
+          <S.FilterLabel>Type 1</S.FilterLabel>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <S.FilterLabel>Type 2</S.FilterLabel>
+        </TouchableOpacity>
+      </S.TopBar>
+      <FlatList
+        // eslint-disable-next-line react-native/no-inline-styles
+        contentContainerStyle={{flexGrow: 1, paddingTop: 10}}
+        data={products}
+        renderItem={renderProductCard}
+        keyExtractor={item => item.id}
+        // extraData={selectedId}
+      />
+    </>
   );
 };
 

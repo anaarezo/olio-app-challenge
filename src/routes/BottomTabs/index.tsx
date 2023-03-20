@@ -13,6 +13,7 @@ export const BottomTabs = () => {
         name="Home"
         component={HomeScreen}
         options={{
+          headerShown: false,
           title: 'Home',
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: () => <Icon name="home" size={25} color="#666666" />,

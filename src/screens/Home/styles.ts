@@ -1,5 +1,21 @@
 import styled from 'styled-components/native';
 
+export const TopBar = styled.View`
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 50px;
+  justify-content: space-around;
+  align-items: center;
+  height: 50;
+  border-bottom-width: 1;
+  border-bottom-color: #ccc;
+`;
+
+export const FilterLabel = styled.Text`
+  font-size: 22px;
+  font-weight: bold;
+`;
+
 export const Card = styled.View`
   border-radius: 10px;
   background-color: #ffffff;

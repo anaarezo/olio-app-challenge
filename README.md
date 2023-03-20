@@ -35,6 +35,8 @@ Evaluate general front end development skills and capabilities.
 - [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
 - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
 - [TypeScript]()
+- [Date fns]()
+- [Google Maps]()
 
 ## Installation
 
