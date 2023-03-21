@@ -15,17 +15,20 @@ Evaluate general front end development skills and capabilities.
     .
     ├── ...
     ├── src
-    │   ├── assets
-    │   ├── routes
-    │   │   ├── BottomTabs
-    │   │   └── Stack
-    │   ├── screens           # Project screens
+    │   ├── components          # Page components
+    │   ├── routes              # React navigation
+    │   │   ├── BottomTabs      # Bottom menu router
+    │   │   └── Stack           # Stack router
+    │   ├── screens             # Project screens
     │   │   ├── Home
     │   │   ├── LocationMap
     │   │   └── ProductDetails
-    │   ├── services
-    │   │   └── library
-    │   └── App.js            # App Loader
+    │   ├── store               # Redux, store, hooks
+    │   │   ├── articles
+    │   │   ├── hooks
+    │   │   └── visited
+    │   ├── utils               # Utility functions
+    │   └── App.js              # App Loader
     └── ...
 
 ## Built With
@@ -33,11 +36,14 @@ Evaluate general front end development skills and capabilities.
 - [React Native](https://reactnative.dev/)
 - [React Navigation](https://reactnavigation.org/)
 - [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
-- [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons)
-- [TypeScript]()
-- [Date fns]()
-- [Google Maps]()
-- [Redux]()
+- [React Native Vector Icons](https://github.com/oblador/react-native-vector-icons)
+- [React Native Testing Library](https://callstack.github.io/react-native-testing-library/)
+- [React Native Maps](https://github.com/react-native-maps/react-native-maps)
+- [Node.js 19.8.1](https://nodejs.org/en/)
+- [Styled Components](https://styled-components.com/docs/api)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Date-fns](https://date-fns.org/)
+- [Redux](https://redux.js.org/)
 
 ## Installation
 
