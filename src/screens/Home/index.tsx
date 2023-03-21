@@ -1,9 +1,11 @@
+/* eslint-disable react-native/no-inline-styles */
 import {useState} from 'react';
 import React, {FlatList, TouchableOpacity} from 'react-native';
 import {useDispatch} from 'react-redux';
 
 import {ProductCard} from '../../components';
 import useProductsList from './hooks/useProductsList';
+
 import {useAppSelector} from '../../store/hooks';
 import {visitedSlice} from '../../store/visited/slice';
 import * as S from './styles';
@@ -51,18 +53,37 @@ const HomeScreen = ({navigation}: IHomeScreen) => {
   };
 
   return (
-    <>
+    <S.Container>
       <S.TopBar>
         <TouchableOpacity onPress={() => setSectionFilter('food')}>
-          <S.FilterLabel>Food</S.FilterLabel>
+          <S.FilterLabel
+            style={
+              sectionFilter === 'food'
+                ? {textDecorationLine: 'underline'}
+                : {textDecorationLine: 'none'}
+            }>
+            Food
+          </S.FilterLabel>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => setSectionFilter('product')}>
-          <S.FilterLabel>Non-Food</S.FilterLabel>
+          <S.FilterLabel
+            style={
+              sectionFilter === 'product'
+                ? {textDecorationLine: 'underline'}
+                : {textDecorationLine: 'none'}
+            }>
+            Non-Food
+          </S.FilterLabel>
         </TouchableOpacity>
       </S.TopBar>
       <FlatList
         // eslint-disable-next-line react-native/no-inline-styles
-        contentContainerStyle={{flexGrow: 1, paddingTop: 10}}
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingTop: 10,
+          borderTopWidth: 1,
+          borderColor: '#cccccc',
+        }}
         data={products?.filter(product =>
           product.section.includes(sectionFilter),
         )}
@@ -70,7 +91,7 @@ const HomeScreen = ({navigation}: IHomeScreen) => {
         keyExtractor={item => item.id}
         // extraData={selectedId}
       />
-    </>
+    </S.Container>
   );
 };
 

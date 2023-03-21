@@ -1,6 +1,9 @@
 import styled from 'styled-components/native';
 
+export const Container = styled.View``;
+
 export const TopBar = styled.View`
+  background: #ffffff;
   flex-direction: row;
   justify-content: flex-start;
   margin-top: 50px;
@@ -10,6 +13,8 @@ export const TopBar = styled.View`
 `;
 
 export const FilterLabel = styled.Text`
+  background: #ffffff;
+  padding: 15px;
   font-size: 22px;
   font-weight: bold;
 `;

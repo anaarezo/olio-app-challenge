@@ -35,7 +35,7 @@ const ProductCard = (props: IProductCard) => {
     <View
       // eslint-disable-next-line react-native/no-inline-styles
       style={{
-        shadowColor: '#666666',
+        shadowColor: '#272727',
         shadowOffset: {
           width: 0,
           height: 2,
@@ -46,6 +46,16 @@ const ProductCard = (props: IProductCard) => {
       }}>
       <S.Card>
         <S.ProductPhoto source={{uri: product_photo}} />
+        {visitedArticles.includes(id) ? (
+          <Icon
+            name="flag"
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{position: 'absolute', left: 10, top: 10}}
+            size={15}
+            color="#ff00a6"
+          />
+        ) : null}
+
         <S.Details>
           <S.Title numberOfLines={1} ellipsizeMode="tail">
             {title}
@@ -72,11 +82,7 @@ const ProductCard = (props: IProductCard) => {
               <S.Distance>{`${distance}mi`}</S.Distance>
             </S.LocationInfo>
             <S.ViewersInfo>
-              <Icon
-                name="eye"
-                size={15}
-                color={visitedArticles.includes(id) ? '#666666' : '#66bb66'}
-              />
+              <Icon name="eye" size={15} color="#666666" />
               <S.Viewed>{views}</S.Viewed>
             </S.ViewersInfo>
             <S.DateInfo>
