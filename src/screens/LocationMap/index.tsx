@@ -1,18 +1,14 @@
-import React, {
-  View,
-  Dimensions,
-  TouchableOpacity,
-  FlatList,
-} from 'react-native';
+import {useState} from 'react';
+import React, {Dimensions, TouchableOpacity, FlatList} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import {SafeAreaView} from 'react-native-safe-area-context';
+
 import useProductsMap from './hooks/useProductsMap';
-import * as S from '../Home/styles';
-import {useState} from 'react';
+import * as S from './styles';
+
 import {IProduct} from '../../store/articles/interface';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import {convertDateToDistance, convertStringUTCToDate} from '../../utils';
 import {ILocation, IMaxMinCoordinates, IProductCard} from './interface';
+import {ProductCard} from '../../components';
 
 const LocationMapScreen = ({navigation}: any) => {
   const {products: products, productsMap: productsMap} = useProductsMap();
@@ -40,60 +36,16 @@ const LocationMapScreen = ({navigation}: any) => {
         onPress={() => {
           navigation.navigate('ProductDetails', {product: item});
         }}>
-        <View
-          // eslint-disable-next-line react-native/no-inline-styles
-          style={{
-            shadowColor: '#666666',
-            shadowOffset: {
-              width: 0,
-              height: 2,
-            },
-            shadowOpacity: 0.15,
-            shadowRadius: 3.84,
-            elevation: 5,
-          }}>
-          <S.Card>
-            <S.ProductPhoto source={{uri: item?.images[0].files.medium}} />
-            <S.Details>
-              <S.Title numberOfLines={1} ellipsizeMode="tail">
-                {item.title}
-              </S.Title>
-              <S.UserInfo>
-                <S.UserAvatar source={{uri: item?.user.current_avatar.small}} />
-                <S.UserName>{item.user.first_name}</S.UserName>
-                <S.RatingInfo>
-                  <S.Rating>
-                    {!item.user.rating.rating ? (
-                      '🐣'
-                    ) : (
-                      <>
-                        <Icon name="star" size={13} color="#ffb300" />
-                        {(item.user.rating.rating / 2).toFixed(1)}
-                      </>
-                    )}
-                  </S.Rating>
-                </S.RatingInfo>
-              </S.UserInfo>
-              <S.ProductInfo>
-                <S.LocationInfo>
-                  <Icon name="map-marker" size={15} color="#666666" />
-                  <S.Distance>{`${item.location.distance}mi`}</S.Distance>
-                </S.LocationInfo>
-                <S.ViewersInfo>
-                  <Icon name="eye" size={15} color="#666666" />
-                  <S.Viewed>{item.reactions.views}</S.Viewed>
-                </S.ViewersInfo>
-                <S.DateInfo>
-                  <S.AddedDate>
-                    {`${convertDateToDistance(
-                      convertStringUTCToDate(item.created_at),
-                    )}`}
-                  </S.AddedDate>
-                </S.DateInfo>
-              </S.ProductInfo>
-            </S.Details>
-          </S.Card>
-        </View>
+        <ProductCard
+          product_photo={item?.images[0].files.medium}
+          title={item.title}
+          first_name={item.user.first_name}
+          current_avatar={item?.user.current_avatar.small}
+          rating={item.user.rating.rating}
+          distance={item.location.distance}
+          views={item.reactions.views}
+          created_at={item.created_at}
+        />
       </TouchableOpacity>
     );
   };
@@ -119,7 +71,7 @@ const LocationMapScreen = ({navigation}: any) => {
 
   return (
     <SafeAreaView>
-      <View>
+      <S.MapContainer>
         <MapView
           // eslint-disable-next-line react-native/no-inline-styles
           style={{
@@ -160,7 +112,7 @@ const LocationMapScreen = ({navigation}: any) => {
             horizontal
           />
         )}
-      </View>
+      </S.MapContainer>
     </SafeAreaView>
   );
 };

@@ -8,8 +8,9 @@ import {
   ProductMap,
   RequestButton,
 } from '../../components';
-import {IProduct} from '../../store/articles/interface';
 import * as S from './styles';
+
+import {IProduct} from '../../store/articles/interface';
 
 interface IProductDetails {
   route: {
