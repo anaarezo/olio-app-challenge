@@ -37,6 +37,7 @@ Evaluate general front end development skills and capabilities.
 - [TypeScript]()
 - [Date fns]()
 - [Google Maps]()
+- [Redux]()
 
 ## Installation
 

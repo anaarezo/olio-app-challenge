@@ -12,11 +12,25 @@ interface IProductCard {
   current_avatar: string;
   rating: number;
   distance: number;
+  id: number;
   views: number;
   created_at: string;
+  visitedArticles: any;
 }
 
 const ProductCard = (props: IProductCard) => {
+  const {
+    product_photo,
+    title,
+    first_name,
+    current_avatar,
+    rating,
+    distance,
+    id,
+    views,
+    created_at,
+    visitedArticles,
+  } = props;
   return (
     <View
       // eslint-disable-next-line react-native/no-inline-styles
@@ -31,22 +45,22 @@ const ProductCard = (props: IProductCard) => {
         elevation: 5,
       }}>
       <S.Card>
-        <S.ProductPhoto source={{uri: props.product_photo}} />
+        <S.ProductPhoto source={{uri: product_photo}} />
         <S.Details>
           <S.Title numberOfLines={1} ellipsizeMode="tail">
-            {props.title}
+            {title}
           </S.Title>
           <S.UserInfo>
-            <S.UserAvatar source={{uri: props.current_avatar}} />
-            <S.UserName>{props.first_name}</S.UserName>
+            <S.UserAvatar source={{uri: current_avatar}} />
+            <S.UserName>{first_name}</S.UserName>
             <S.RatingInfo>
               <S.Rating>
-                {!props.rating ? (
+                {!rating ? (
                   '🐣'
                 ) : (
                   <>
                     <Icon name="star" size={13} color="#ffb300" />
-                    {(props.rating / 2).toFixed(1)}
+                    {(rating / 2).toFixed(1)}
                   </>
                 )}
               </S.Rating>
@@ -55,17 +69,19 @@ const ProductCard = (props: IProductCard) => {
           <S.ProductInfo>
             <S.LocationInfo>
               <Icon name="map-marker" size={15} color="#666666" />
-              <S.Distance>{`${props.distance}mi`}</S.Distance>
+              <S.Distance>{`${distance}mi`}</S.Distance>
             </S.LocationInfo>
             <S.ViewersInfo>
-              <Icon name="eye" size={15} color="#666666" />
-              <S.Viewed>{props.views}</S.Viewed>
+              <Icon
+                name="eye"
+                size={15}
+                color={visitedArticles.includes(id) ? '#666666' : '#66bb66'}
+              />
+              <S.Viewed>{views}</S.Viewed>
             </S.ViewersInfo>
             <S.DateInfo>
               <S.AddedDate>
-                {`${convertDateToDistance(
-                  convertStringUTCToDate(props.created_at),
-                )}`}
+                {`${convertDateToDistance(convertStringUTCToDate(created_at))}`}
               </S.AddedDate>
             </S.DateInfo>
           </S.ProductInfo>

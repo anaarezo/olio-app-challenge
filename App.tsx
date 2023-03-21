@@ -4,18 +4,19 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {Provider} from 'react-redux';
 
 import {StackScreen} from './src/routes/Stack';
-import {setupStore} from './src/store';
-
-const store = setupStore();
+import {persistor, store} from './src/store';
+import {PersistGate} from 'redux-persist/integration/react';
 
 const App = (): JSX.Element => {
   return (
     <Provider store={store}>
-      <SafeAreaProvider>
-        <NavigationContainer>
-          <StackScreen />
-        </NavigationContainer>
-      </SafeAreaProvider>
+      <PersistGate persistor={persistor}>
+        <SafeAreaProvider>
+          <NavigationContainer>
+            <StackScreen />
+          </NavigationContainer>
+        </SafeAreaProvider>
+      </PersistGate>
     </Provider>
   );
 };

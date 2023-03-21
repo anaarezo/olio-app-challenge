@@ -1,8 +1,11 @@
 import {useState} from 'react';
 import React, {FlatList, TouchableOpacity} from 'react-native';
+import {useDispatch} from 'react-redux';
 
 import {ProductCard} from '../../components';
 import useProductsList from './hooks/useProductsList';
+import {useAppSelector} from '../../store/hooks';
+import {visitedSlice} from '../../store/visited/slice';
 import * as S from './styles';
 
 import {IProduct} from '../../store/articles/interface';
@@ -19,11 +22,16 @@ const HomeScreen = ({navigation}: IHomeScreen) => {
   const {products} = useProductsList();
 
   const [sectionFilter, setSectionFilter] = useState<string>('');
+  const visitedArticles = useAppSelector(
+    state => state.visited.articlesVisited,
+  );
+  const dispatch = useDispatch();
 
   const renderProductCard = ({item}: IProductCard) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          dispatch(visitedSlice.actions.addVisited(item.id));
           navigation.navigate('ProductDetails', {product: item});
         }}>
         <ProductCard
@@ -33,8 +41,10 @@ const HomeScreen = ({navigation}: IHomeScreen) => {
           current_avatar={item?.user.current_avatar.small}
           rating={item.user.rating.rating}
           distance={item.location.distance}
+          id={item.id}
           views={item.reactions.views}
           created_at={item.created_at}
+          visitedArticles={visitedArticles}
         />
       </TouchableOpacity>
     );

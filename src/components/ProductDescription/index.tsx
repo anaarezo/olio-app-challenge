@@ -9,15 +9,16 @@ interface IProductDescription {
 }
 
 const ProductContent = (props: IProductDescription) => {
+  const {description, section, collection_notes} = props;
   return (
     <S.Description>
-      <S.ProductDescription>{props.description}</S.ProductDescription>
-      {props.section === 'food' ? (
+      <S.ProductDescription>{description}</S.ProductDescription>
+      {section === 'food' ? (
         <S.MoreInfo>{'View food allergen information'}</S.MoreInfo>
       ) : null}
 
       <S.PickupTitle>{'Pick-up times'}</S.PickupTitle>
-      <S.PickupDescription>{props.collection_notes}</S.PickupDescription>
+      <S.PickupDescription>{collection_notes}</S.PickupDescription>
     </S.Description>
   );
 };

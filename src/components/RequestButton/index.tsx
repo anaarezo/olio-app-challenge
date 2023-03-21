@@ -8,13 +8,14 @@ interface IRequestButton {
 }
 
 const RequestButton = (props: IRequestButton) => {
+  const {distance} = props;
   return (
     <S.ContainerButton>
       <S.RequestButton>
         <S.RequestLabel>{'Request this'}</S.RequestLabel>
         <S.RequestLocation>
           <Icon name="map-marker" size={13} color="#ff94e2" />
-          {` ${props.distance}mi away`}
+          {` ${distance}mi away`}
         </S.RequestLocation>
       </S.RequestButton>
     </S.ContainerButton>

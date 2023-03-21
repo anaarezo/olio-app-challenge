@@ -14,28 +14,29 @@ interface IProductContent {
 }
 
 const ProductContent = (props: IProductContent) => {
+  const {current_avatar, rating, first_name, title, created_at, roles} = props;
   return (
     <S.Content>
       <S.UserInfo>
-        <S.UserAvatar source={{uri: props.current_avatar}} />
-        {!props.rating ? null : (
+        <S.UserAvatar source={{uri: current_avatar}} />
+        {!rating ? null : (
           <S.RatingInfo>
             <Icon name="star" size={10} color="#ffffff" />
-            <S.Rating>{(props.rating / 2).toFixed(1)}</S.Rating>
+            <S.Rating>{(rating / 2).toFixed(1)}</S.Rating>
           </S.RatingInfo>
         )}
       </S.UserInfo>
 
       <S.ProductInfo>
-        <S.UserName>{`${props.first_name} is giving away`}</S.UserName>
-        <S.Title>{props.title}</S.Title>
+        <S.UserName>{`${first_name} is giving away`}</S.UserName>
+        <S.Title>{title}</S.Title>
         <S.AddedDate>
           <Icon name="clock-o" size={14} color="#444444" />
           <S.Time>{`Added ${convertDateToDistance(
-            convertStringUTCToDate(props.created_at),
+            convertStringUTCToDate(created_at),
           )} `}</S.Time>
 
-          {props.roles.includes('Volunteer') ? (
+          {roles.includes('Volunteer') ? (
             <S.Role>{'• Volunteer'}</S.Role>
           ) : null}
         </S.AddedDate>

@@ -6,8 +6,6 @@ export const TopBar = styled.View`
   margin-top: 50px;
   justify-content: space-around;
   align-items: center;
-  height: 50;
-  border-bottom-width: 1;
   border-bottom-color: #ccc;
 `;
 

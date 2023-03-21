@@ -13,6 +13,7 @@ interface IProductMap {
 const DIMENSION_DELTA = 0.002;
 
 const ProductMap = (props: IProductMap) => {
+  const {distance, latitude, longitude} = props;
   const {width} = Dimensions.get('screen');
   return (
     <>
@@ -20,7 +21,7 @@ const ProductMap = (props: IProductMap) => {
         <S.Aprox>{'Approx. Location'}</S.Aprox>
         <S.AproxDistance>
           <Icon name="map-marker" size={13} color="#757576" />
-          {` ${props.distance}mi away`}
+          {` ${distance}mi away`}
         </S.AproxDistance>
       </S.Place>
       <S.LocationMap>
@@ -31,15 +32,15 @@ const ProductMap = (props: IProductMap) => {
             height: 270,
           }}
           initialRegion={{
-            latitude: props.latitude,
-            longitude: props.longitude,
+            latitude: latitude,
+            longitude: longitude,
             latitudeDelta: DIMENSION_DELTA,
             longitudeDelta: DIMENSION_DELTA,
           }}>
           <Circle
             center={{
-              latitude: props.latitude,
-              longitude: props.longitude,
+              latitude: latitude,
+              longitude: longitude,
             }}
             radius={20}
             strokeColor={'#bb4291'}

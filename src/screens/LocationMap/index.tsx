@@ -9,10 +9,18 @@ import * as S from './styles';
 import {IProduct} from '../../store/articles/interface';
 import {ILocation, IMaxMinCoordinates, IProductCard} from './interface';
 import {ProductCard} from '../../components';
+import {useDispatch} from 'react-redux';
+import {visitedSlice} from '../../store/visited/slice';
+import {useAppSelector} from '../../store/hooks';
 
 const LocationMapScreen = ({navigation}: any) => {
   const {products: products, productsMap: productsMap} = useProductsMap();
   const [selectedProducts, setSelectedProducts] = useState<IProduct[]>([]);
+  const visitedArticles = useAppSelector(
+    state => state.visited.articlesVisited,
+  );
+
+  const dispatch = useDispatch();
 
   if (!products || !productsMap) {
     return;
@@ -34,6 +42,7 @@ const LocationMapScreen = ({navigation}: any) => {
     return (
       <TouchableOpacity
         onPress={() => {
+          dispatch(visitedSlice.actions.addVisited(item.id));
           navigation.navigate('ProductDetails', {product: item});
         }}>
         <ProductCard
@@ -43,8 +52,10 @@ const LocationMapScreen = ({navigation}: any) => {
           current_avatar={item?.user.current_avatar.small}
           rating={item.user.rating.rating}
           distance={item.location.distance}
+          id={item.id}
           views={item.reactions.views}
           created_at={item.created_at}
+          visitedArticles={visitedArticles}
         />
       </TouchableOpacity>
     );
