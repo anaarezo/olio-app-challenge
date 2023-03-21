@@ -22,17 +22,17 @@ const LocationMapScreen = ({navigation}: any) => {
     return;
   }
 
-  function minAndMaxLatitudeAndLongitude(
+  const minAndMaxLatitudeAndLongitude = (
     coordinate: IMaxMinCoordinates,
     {location}: ILocation,
-  ) {
+  ) => {
     return {
       maxLatitude: Math.max(coordinate.maxLatitude, location.latitude),
       maxLongitude: Math.max(coordinate.maxLongitude, location.longitude),
       minLatitude: Math.min(coordinate.minLatitude, location.latitude),
       minLongitude: Math.min(coordinate.minLongitude, location.longitude),
     };
-  }
+  };
 
   const renderProductCard = ({item}: IProductCard) => {
     return (
