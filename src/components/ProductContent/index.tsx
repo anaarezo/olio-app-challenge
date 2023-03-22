@@ -6,7 +6,7 @@ import * as S from './styles';
 
 interface IProductContent {
   current_avatar: string;
-  rating: number;
+  rating: number | null;
   first_name: string;
   title: string;
   created_at: string;
@@ -20,7 +20,7 @@ const ProductContent = (props: IProductContent) => {
       <S.UserInfo>
         <S.UserAvatar source={{uri: current_avatar}} />
         {!rating ? null : (
-          <S.RatingInfo>
+          <S.RatingInfo testID="ratingInfo">
             <Icon name="star" size={10} color="#ffffff" />
             <S.Rating>{(rating / 2).toFixed(1)}</S.Rating>
           </S.RatingInfo>

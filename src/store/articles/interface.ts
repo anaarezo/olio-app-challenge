@@ -35,38 +35,34 @@ export interface IProduct {
     linked: number;
     request_id: null;
   };
-  photos: [
-    {
-      uid: string;
-      files: {
-        original: string;
-        large: string;
-        medium: string;
-        small: string;
-      };
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    },
-  ];
-  images: [
-    {
-      uid: string;
-      files: {
-        original: string;
-        large: string;
-        medium: string;
-        small: string;
-      };
-      dimensions: {
-        width: number;
-        height: number;
-      };
-    },
-  ];
+  photos: {
+    uid: string;
+    files: {
+      original: string;
+      large: string;
+      medium: string;
+      small: string;
+    };
+    dimensions: {
+      width: number;
+      height: number;
+    };
+  }[];
+  images: {
+    uid: string;
+    files: {
+      original: string;
+      large: string;
+      medium: string;
+      small: string;
+    };
+    dimensions: {
+      width: number;
+      height: number;
+    };
+  }[];
   user: {
-    id: string;
+    id: number;
     first_name: string;
     current_avatar: {
       original: string;
@@ -88,7 +84,7 @@ export interface IProduct {
   last_listed: string;
   pickups?: {
     multiple: boolean;
-    users: [];
+    users: {}[];
     items: number;
   };
   veteran_delay: number;

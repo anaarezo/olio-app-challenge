@@ -18,8 +18,8 @@ describe('Product Details Page --- InfoBar', () => {
   };
 
   it('Should be rendered', () => {
-    const {bar, likes, debug} = setup();
-    debug();
+    const {bar, likes} = setup();
+
     expect(bar).toBeTruthy();
     expect(likes).toBeTruthy();
   });

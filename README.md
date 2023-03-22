@@ -69,9 +69,11 @@ pod install
 ```
 
 4 - To open the project use xCode
+<br />
 <img src="https://user-images.githubusercontent.com/13490305/226761973-d6b59506-3c1c-4bd2-aa05-a40a64a48678.png" width="100px" />
 
 5 - Open the project workspace using xCode `ios/OlioApp.xcworkspace`
+<br />
 <img width="161" alt="Untitled" src="https://user-images.githubusercontent.com/13490305/226764683-58a92fdb-bf92-4c27-b980-cbafae526fb7.png">
 
 6 - Click on play icon (circled in red) to run the project as the image below:
@@ -79,22 +81,22 @@ pod install
 
 # Points of Improvement and Comments
 
-- As there was no recent information I decided to leave the date exposed instead of label `just added`
-- I'm having trouble getting it to run Android Studio on my Macbook and I ended up doing tests only using xCode.
-- In order not to take too long to develop, I ended up choosing to focus on the development of the App on iOS.
-- The Request button does not go to another screen, I prefer to focus on developing the main screens based on API data.
-- I would improve the map information by getting the grouped item numbers and also the Icon.
-- Should start the unit tests as TDD, but I ended up leaving it for the end. These made it more complex to resolve the failures.
-- Could make an accessible layout focused on WCAG if it was the project.
-- Isolate environment variables, such as API URL using env.
-- I ended up separating the tests only into components to make testing the rendering simpler than testing large screens. It also contributes to maintainability and to discover possible failitures.
-- As I tried to make the app work fast, I ended up not focusing so much on the layout colors that should be gray and not white. I chose to focus on the functionalities working as correctly as possible, according to the limited time.
-- The `allergy` link does not redirect to a WebView or external link. I just put it as a layout item.
-- The folder structure of screen components could be modified according to domain(screen), in this case I chose to build reusable components.
-- I decided at the last minute to make a reusable component with ProductCard to make it easier instead of ["Rule of Three" (code duplication)](https://wou.edu/las/cs/csclasses/cs161/Lectures/rulesofthumb.html)
-- Some items on the page could be better styled, due to the time limit I ended up not focusing on this part, like BottomTabs, for example.
+- As there was no recent information, I decided to leave the date exposed instead of labelling it as "just added."
+- I am having trouble getting Android Studio to run on my MacBook, so I ended up doing tests only using Xcode.
+- To avoid taking too long to develop, I chose to focus on the development of the app on iOS.
+- The "Request" button does not take you to another screen, as I preferred to focus on developing the main screens based on API data.
+- I would improve the map information by getting the grouped item numbers and also the icon.
+- I should have started the unit tests as TDD, but I left them until the end, which made it more complex to resolve the failures.
+- If this were the project, I could make an accessible layout focused on WCAG.
+- I isolated environment variables, such as API URL, using env.
+- I separated the tests only into components to make testing the rendering simpler than testing large screens. It also contributes to maintainability and discovering possible failures.
+- As I tried to make the app work fast, I did not focus so much on the layout colours, which should be gray and not white. I chose to focus on the functionalities working as correctly as possible, according to the limited time.
+- The "allergy" link does not redirect to a WebView or external link. I just put it as a layout item.
+- The folder structure of screen components could be modified according to the domain(screen). In this case, I chose to build reusable components.
+- At the last minute, I decided to make a reusable component with ProductCard to make it easier instead of using the "Rule of Three" (code duplication).
+- Some items on the page could be better styled. Due to the time limit, I did not focus on this part, such as BottomTabs, for example.
 - The colour codes could have been part of a theme file instead of being scattered throughout the code and hardcoded.
-- The pink flags over the product photos are representing a visited product.
+- The pink flags over the product photos represent a visited product.
 
 ## Author
 
