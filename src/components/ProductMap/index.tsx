@@ -36,7 +36,8 @@ const ProductMap = (props: IProductMap) => {
             longitude: longitude,
             latitudeDelta: DIMENSION_DELTA,
             longitudeDelta: DIMENSION_DELTA,
-          }}>
+          }}
+          testID="map">
           <Circle
             center={{
               latitude: latitude,
@@ -45,6 +46,7 @@ const ProductMap = (props: IProductMap) => {
             radius={20}
             strokeColor={'#bb4291'}
             fillColor={'rgba(187,66,145,0.05)'}
+            testID="circle"
           />
         </MapView>
       </S.LocationMap>

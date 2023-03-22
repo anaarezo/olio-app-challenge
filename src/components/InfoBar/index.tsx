@@ -30,7 +30,10 @@ const InfoBar = (props: IInfoBarProps) => {
         </S.ShareBox>
         <S.LikeBox>
           <Icon name="heart-o" size={18} color="#444444" />
-          <S.Likes>{`${likes} likes`}</S.Likes>
+          <S.Likes>
+            {`${likes}`}
+            {likes === 1 ? 'like' : 'likes'}
+          </S.Likes>
         </S.LikeBox>
       </S.BarContent>
     </S.InfoBar>

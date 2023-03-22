@@ -31,6 +31,8 @@ const ProductCard = (props: IProductCard) => {
     created_at,
     visitedArticles,
   } = props;
+
+  console.log('visitedArticles', visitedArticles);
   return (
     <View
       // eslint-disable-next-line react-native/no-inline-styles
@@ -45,7 +47,7 @@ const ProductCard = (props: IProductCard) => {
         elevation: 5,
       }}>
       <S.Card>
-        <S.ProductPhoto source={{uri: product_photo}} />
+        <S.ProductPhoto source={{uri: product_photo}} testID="productPhoto" />
         {visitedArticles.includes(id) ? (
           <Icon
             name="flag"
